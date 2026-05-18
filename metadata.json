@@ -1,0 +1,6 @@
+{
+  "name": "Sadsha Prime",
+  "description": "The ultimate elite fitness protocol engine with AI coaching, global community councils, and neural optimization.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

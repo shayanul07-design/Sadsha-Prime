@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  
+  --color-brand-cyan: #22d3ee;
+  --color-brand-blue: #2563eb;
+  --color-brand-dark: #08080a;
+}
+
+@layer base {
+  body {
+    @apply bg-[#08080a] text-slate-100 selection:bg-cyan-500/30;
+  }
+}
+
+@layer components {
+  .sleek-card {
+    @apply bg-[#0f0f12] border border-white/5 rounded-[2rem] shadow-2xl;
+  }
+  
+  .btn-sleek-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black uppercase tracking-widest rounded-xl hover:shadow-cyan-500/20 active:scale-95 transition-all;
+  }
+}
+

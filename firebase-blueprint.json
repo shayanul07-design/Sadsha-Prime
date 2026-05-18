@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user demographic, health data, and subscription status.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "tier": { "type": "string", "enum": ["Free", "Gold", "Platinum", "Diamond"] },
+        "subscriptionExpiry": { "type": "string", "format": "date-time" },
+        "goals": { "type": "array", "items": { "type": "string" } },
+        "onboardingComplete": { "type": "boolean" },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "weight": { "type": "number" },
+            "height": { "type": "number" },
+            "activityLevel": { "type": "string" }
+          }
+        },
+        "streak": { "type": "integer" },
+        "lastActive": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email", "tier"]
+    },
+    "Workout": {
+      "title": "Workout Routine",
+      "description": "Definition of a workout routine with exercises.",
+      "type": "object",
+      "properties": {
+        "workoutId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "sets": { "type": "integer" },
+              "reps": { "type": "integer" },
+              "weight": { "type": "number" },
+              "rest": { "type": "integer" }
+            }
+          }
+        },
+        "createdBy": { "type": "string" },
+        "isTemplate": { "type": "boolean" },
+        "category": { "type": "string" }
+      }
+    },
+    "WorkoutLog": {
+      "title": "Workout Log",
+      "description": "Historical record of a completed workout session.",
+      "type": "object",
+      "properties": {
+        "logId": { "type": "string" },
+        "userId": { "type": "string" },
+        "workoutId": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "duration": { "type": "integer" },
+        "caloriesBurned": { "type": "number" },
+        "intensity": { "type": "integer" },
+        "notes": { "type": "string" }
+      }
+    },
+    "Group": {
+      "title": "Community Group",
+      "description": "A group of users who share progress and take on challenges.",
+      "type": "object",
+      "properties": {
+        "groupId": { "type": "string" },
+        "name": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "members": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Challenge": {
+      "title": "Fitness Challenge",
+      "description": "A specific time-bound goal for group members.",
+      "type": "object",
+      "properties": {
+        "challengeId": { "type": "string" },
+        "groupId": { "type": "string" },
+        "title": { "type": "string" },
+        "goalType": { "type": "string" },
+        "goalValue": { "type": "number" },
+        "startDate": { "type": "string", "format": "date-time" },
+        "endDate": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual user profiles"
+    },
+    "/workouts/{workoutId}": {
+      "schema": "Workout",
+      "description": "Global and user-specific workout routines"
+    },
+    "/logs/{logId}": {
+      "schema": "WorkoutLog",
+      "description": "Saved workout sessions"
+    },
+    "/groups/{groupId}": {
+      "schema": "Group",
+      "description": "User-created groups"
+    },
+    "/groups/{groupId}/challenges/{challengeId}": {
+      "schema": "Challenge",
+      "description": "Challenges within a group"
+    }
+  }
+}
